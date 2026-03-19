@@ -50,9 +50,29 @@
 - 检索原文高亮展示
 - 相似度分数可视化
 
-## 快速开始
+## 版本说明
 
-### 环境配置
+本项目提供两个版本：
+
+- **原生版本**: 手动实现各组件，深入理解RAG原理
+- **LangChain版本**: 使用LangChain框架，快速构建RAG系统
+
+### LangChain版本（推荐）
+
+```bash
+# 安装LangChain依赖
+pip install -r requirements.txt
+
+# 构建知识库
+python main_langchain.py
+
+# 启动Web界面
+streamlit run visualization/langchain_app.py
+```
+
+---
+
+### 原生版本（环境配置）
 
 ```bash
 # 克隆项目
@@ -97,21 +117,24 @@ streamlit run visualization/app.py
 
 ```
 RAGknowledge/
-├── knowledge_base/         # 知识库构建模块
+├── knowledge_base/         # 知识库构建模块（原生版）
 │   ├── nougat_parser.py   # PDF解析器
 │   ├── text_splitter.py   # 文本分块
 │   └── vector_store.py    # 向量存储
-├── retrieval/             # 检索模块
+├── retrieval/             # 检索模块（原生版）
 │   └── retriever.py       # 向量检索
-├── evaluation/            # 评估模块
+├── evaluation/            # 评估模块（原生版）
 │   └── threshold_filter.py # 阈值过滤
-├── llm/                   # LLM集成
+├── llm/                   # LLM集成（原生版）
 │   ├── qwen_client.py     # 千问客户端
 │   └── claude_client.py   # Claude客户端
 ├── visualization/         # 可视化
-│   └── app.py             # Streamlit应用
-├── rag_system.py          # RAG系统主逻辑
-├── main.py                # 入口脚本
+│   ├── app.py             # Streamlit应用（原生版）
+│   └── langchain_app.py   # Streamlit应用（LangChain版）
+├── langchain_rag.py       # LangChain版RAG系统
+├── main.py                # 入口脚本（原生版）
+├── main_langchain.py      # 入口脚本（LangChain版）
+├── rag_system.py          # RAG系统主逻辑（原生版）
 └── config.py              # 配置文件
 ```
 
@@ -119,9 +142,10 @@ RAGknowledge/
 
 | 组件 | 技术选型 |
 |------|----------|
+| RAG框架 | LangChain（推荐）/ 原生实现 |
 | 向量数据库 | FAISS |
 | 嵌入模型 | sentence-transformers/all-MiniLM-L6-v2 |
-| PDF解析 | pdfplumber + Tesseract OCR |
+| PDF解析 | PyPDFLoader / pdfplumber |
 | 大语言模型 | Qwen / Claude |
 | Web框架 | Streamlit |
 | Python版本 | 3.8+ |
